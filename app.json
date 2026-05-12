@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "permitpilot-dmv-prep",
+    "name": "PermitPilot",
     "slug": "permitpilot-dmv-prep",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "permitpilotdmvprep",
-    "userInterfaceStyle": "automatic",
+    "scheme": "permitpilot",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash-icon.png",
