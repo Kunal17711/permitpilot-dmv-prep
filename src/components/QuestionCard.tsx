@@ -17,6 +17,7 @@ export function QuestionCard({ question, selectedIndex, showFeedback = false, on
     <View style={styles.card}>
       <TopicPill topic={question.topic} difficulty={question.difficulty} />
       <Text style={styles.question}>{question.question}</Text>
+      {!showFeedback ? <Text style={styles.prompt}>Tap the best answer to check it instantly.</Text> : null}
       <View style={styles.options}>
         {question.options.map((option, index) => {
           const isCorrect = index === question.correctAnswerIndex;
@@ -44,7 +45,7 @@ export function QuestionCard({ question, selectedIndex, showFeedback = false, on
       </View>
       {showFeedback ? (
         <View style={styles.explanation}>
-          <Text style={styles.explanationLabel}>Explanation</Text>
+          <Text style={styles.explanationLabel}>{selectedIndex === question.correctAnswerIndex ? 'Correct explanation' : 'Why this is the right answer'}</Text>
           <Text style={styles.explanationText}>{question.explanation}</Text>
         </View>
       ) : null}
@@ -75,8 +76,8 @@ const styles = StyleSheet.create({
   option: {
     minHeight: 64,
     borderRadius: 16,
-    padding: 14,
-    borderWidth: 1,
+    padding: 15,
+    borderWidth: 1.5,
     borderColor: theme.colors.border,
     backgroundColor: '#FBFDFC',
     flexDirection: 'row',
@@ -86,6 +87,11 @@ const styles = StyleSheet.create({
   selectedOption: {
     borderColor: theme.colors.primary,
     backgroundColor: '#F0FDFA',
+    shadowColor: theme.colors.primary,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.09,
+    shadowRadius: 12,
+    elevation: 2,
   },
   correctOption: {
     borderColor: theme.colors.success,
@@ -122,6 +128,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 21,
     fontWeight: '700',
+  },
+  prompt: {
+    color: theme.colors.muted,
+    fontSize: 13,
+    fontWeight: '700',
+    lineHeight: 19,
+    marginTop: 8,
   },
   correctText: {
     color: '#065F46',

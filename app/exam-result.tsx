@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { Award, RotateCw, TriangleAlert } from 'lucide-react-native';
+import { Award, Home, RotateCw, TriangleAlert } from 'lucide-react-native';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { AppButton } from '@/src/components/AppButton';
@@ -36,6 +36,22 @@ export default function ExamResultScreen() {
         <Text style={styles.message}>
           {result.passed ? `Nice work. Your ${getStateName(result.state)} readiness is looking solid.` : 'You are close. Review your weakest topics, then take another full exam.'}
         </Text>
+        <View style={styles.resultStats}>
+          <View style={styles.resultStat}>
+            <Text style={styles.resultStatValue}>{result.total}</Text>
+            <Text style={styles.resultStatLabel}>Questions</Text>
+          </View>
+          <View style={styles.resultDivider} />
+          <View style={styles.resultStat}>
+            <Text style={styles.resultStatValue}>80%</Text>
+            <Text style={styles.resultStatLabel}>Pass mark</Text>
+          </View>
+          <View style={styles.resultDivider} />
+          <View style={styles.resultStat}>
+            <Text style={styles.resultStatValue}>{result.passed ? 'Ready' : 'Review'}</Text>
+            <Text style={styles.resultStatLabel}>Next step</Text>
+          </View>
+        </View>
       </View>
 
       <Text style={styles.sectionTitle}>Topic breakdown</Text>
@@ -53,7 +69,8 @@ export default function ExamResultScreen() {
 
       <View style={styles.actions}>
         <AppButton title="Review weak topics" onPress={() => router.push('/weak-topics')} variant="secondary" />
-        <AppButton title="Practice again" onPress={() => router.push('/practice')} icon={<RotateCw color="#FFFFFF" size={19} />} />
+        <AppButton title="Retake full exam" onPress={() => router.replace('/exam')} icon={<RotateCw color="#FFFFFF" size={19} />} />
+        <AppButton title="Go home" onPress={() => router.replace('/home')} variant="ghost" icon={<Home color={theme.colors.text} size={19} />} />
       </View>
     </Screen>
   );
@@ -102,6 +119,35 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 21,
     marginTop: 16,
+  },
+  resultStats: {
+    marginTop: 20,
+    borderRadius: 20,
+    padding: 14,
+    backgroundColor: 'rgba(255,255,255,0.14)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  resultStat: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  resultStatValue: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '900',
+  },
+  resultStatLabel: {
+    color: '#DDF7F1',
+    fontSize: 11,
+    fontWeight: '800',
+    marginTop: 3,
+  },
+  resultDivider: {
+    width: 1,
+    height: 34,
+    backgroundColor: 'rgba(255,255,255,0.2)',
   },
   sectionTitle: {
     color: theme.colors.text,

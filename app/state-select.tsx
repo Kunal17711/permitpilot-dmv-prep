@@ -27,7 +27,7 @@ export default function StateSelectScreen() {
     <Screen>
       <Text style={styles.kicker}>State setup</Text>
       <Text style={styles.title}>Pick the permit test track you want to study.</Text>
-      <Text style={styles.subtitle}>Your dashboard and question bank will focus on the selected state.</Text>
+      <Text style={styles.subtitle}>Your dashboard, practice queue, and full exam simulation will use a localized question bank for the state you choose.</Text>
 
       <View style={styles.list}>
         {states.map((driverState) => (
@@ -35,7 +35,10 @@ export default function StateSelectScreen() {
         ))}
       </View>
 
-      <AppButton title="Save state" onPress={save} disabled={!selected} style={styles.button} />
+      <View style={styles.savePanel}>
+        <Text style={styles.saveCopy}>{selected ? 'Ready to build your personalized prep plan.' : 'Select a state to unlock your dashboard.'}</Text>
+        <AppButton title="Save state" onPress={save} disabled={!selected} />
+      </View>
     </Screen>
   );
 }
@@ -66,5 +69,20 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 24,
+  },
+  savePanel: {
+    marginTop: 24,
+    backgroundColor: theme.colors.surface,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: theme.colors.cardBorder,
+    padding: 14,
+    gap: 12,
+  },
+  saveCopy: {
+    color: theme.colors.muted,
+    fontSize: 13,
+    fontWeight: '700',
+    lineHeight: 19,
   },
 });

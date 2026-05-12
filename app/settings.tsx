@@ -46,8 +46,8 @@ export default function SettingsScreen() {
 
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Progress controls</Text>
-        <Text style={styles.cardCopy}>Resetting keeps your selected state but clears local practice stats, weak topics, and full exam history.</Text>
-        <AppButton title="Reset progress" onPress={confirmReset} variant="danger" icon={<RotateCcw color={theme.colors.danger} size={19} />} />
+        <Text style={styles.cardCopy}>Resetting keeps your selected state but clears local practice stats, weak topics, and full exam history. A confirmation appears before anything changes.</Text>
+        <AppButton title="Reset progress" onPress={confirmReset} variant="ghost" icon={<RotateCcw color={theme.colors.text} size={19} />} />
       </View>
     </Screen>
   );

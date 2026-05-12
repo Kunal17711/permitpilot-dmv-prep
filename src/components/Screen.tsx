@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { ScrollView, StyleSheet, View, ViewStyle } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
 import { theme } from '@/src/constants/theme';
@@ -12,15 +12,26 @@ type ScreenProps = {
 };
 
 export function Screen({ children, scroll = true, contentStyle }: ScreenProps) {
+  const insets = useSafeAreaInsets();
+  const paddedContent = [
+    styles.content,
+    { paddingBottom: Math.max(64, insets.bottom + 48) },
+    contentStyle,
+  ];
+
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
       <StatusBar style="dark" />
       {scroll ? (
-        <ScrollView contentContainerStyle={[styles.content, contentStyle]} showsVerticalScrollIndicator={false}>
+        <ScrollView
+          contentContainerStyle={paddedContent}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
           {children}
         </ScrollView>
       ) : (
-        <View style={[styles.content, styles.flex, contentStyle]}>{children}</View>
+        <View style={[...paddedContent, styles.flex]}>{children}</View>
       )}
     </SafeAreaView>
   );
@@ -34,7 +45,6 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 20,
     paddingTop: 14,
-    paddingBottom: 34,
   },
   flex: {
     flex: 1,

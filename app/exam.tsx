@@ -82,8 +82,12 @@ export default function ExamScreen() {
       </View>
 
       <View style={styles.progressCard}>
+        <View style={styles.progressTop}>
+          <Text style={styles.progressLabel}>Exam progress</Text>
+          <Text style={styles.progressValue}>{Math.round(progress)}%</Text>
+        </View>
         <ProgressBar value={progress} />
-        <Text style={styles.progressText}>Passing score: 80%</Text>
+        <Text style={styles.progressText}>20 questions. Passing score: 80%. Your answers are scored when you finish.</Text>
       </View>
 
       <QuestionCard question={currentQuestion} selectedIndex={selectedIndex} onSelect={setSelectedIndex} />
@@ -149,12 +153,30 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.cardBorder,
     gap: 9,
   },
+  progressTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 12,
+  },
+  progressLabel: {
+    color: theme.colors.text,
+    fontSize: 14,
+    fontWeight: '900',
+  },
+  progressValue: {
+    color: theme.colors.primary,
+    fontSize: 14,
+    fontWeight: '900',
+  },
   progressText: {
     color: theme.colors.muted,
     fontSize: 12,
     fontWeight: '800',
+    lineHeight: 18,
   },
   nextButton: {
     marginTop: 18,
+    marginBottom: 10,
   },
 });

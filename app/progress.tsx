@@ -39,6 +39,7 @@ export default function ProgressScreen() {
         </View>
         <Text style={styles.readinessScore}>{summary.readinessScore}%</Text>
         <ProgressBar value={summary.readinessScore} fillColor="#FFFFFF" trackColor="rgba(255,255,255,0.26)" />
+        <Text style={styles.readinessCopy}>Combines practice accuracy, completed questions, best exam score, and weak-topic load.</Text>
       </View>
 
       <View style={styles.grid}>
@@ -55,6 +56,7 @@ export default function ProgressScreen() {
         <View>
           <Text style={styles.stateLabel}>Selected state</Text>
           <Text style={styles.stateValue}>{getStateName(selectedState)}</Text>
+          <Text style={styles.stateDetail}>All practice and exam scoring is stored locally on this device.</Text>
         </View>
       </View>
     </Screen>
@@ -120,6 +122,12 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     marginVertical: 12,
   },
+  readinessCopy: {
+    color: '#E9FFFA',
+    fontSize: 13,
+    lineHeight: 20,
+    marginTop: 14,
+  },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -147,5 +155,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '900',
     marginTop: 2,
+  },
+  stateDetail: {
+    color: theme.colors.muted,
+    fontSize: 12,
+    lineHeight: 18,
+    marginTop: 4,
   },
 });

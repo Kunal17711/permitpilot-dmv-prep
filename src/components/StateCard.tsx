@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
   },
   selected: {
     borderColor: theme.colors.primary,
-    backgroundColor: '#FBFFFE',
+    backgroundColor: '#F0FDFA',
+    shadowOpacity: 0.12,
   },
   badge: {
     width: 50,

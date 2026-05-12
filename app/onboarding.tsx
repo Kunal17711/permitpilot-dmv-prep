@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { Car, ClipboardCheck, MapPinned, ShieldCheck } from 'lucide-react-native';
+import { Car, ClipboardCheck, MapPinned, ShieldCheck, Sparkles } from 'lucide-react-native';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { AppButton } from '@/src/components/AppButton';
@@ -16,14 +16,20 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <Screen scroll={false} contentStyle={styles.screen}>
-      <View style={styles.brandMark}>
-        <Car color="#FFFFFF" size={34} strokeWidth={2.5} />
-      </View>
-      <View>
+    <Screen contentStyle={styles.screen}>
+      <View style={styles.hero}>
+        <View style={styles.brandRow}>
+          <View style={styles.brandMark}>
+            <Car color="#FFFFFF" size={34} strokeWidth={2.5} />
+          </View>
+          <View style={styles.badge}>
+            <Sparkles color={theme.colors.primary} size={15} />
+            <Text style={styles.badgeText}>Local progress</Text>
+          </View>
+        </View>
         <Text style={styles.kicker}>PermitPilot</Text>
-        <Text style={styles.title}>Your calm cockpit for permit test prep.</Text>
-        <Text style={styles.subtitle}>Practice original DMV-style questions, strengthen weak topics, and take focused 20-question readiness exams.</Text>
+        <Text style={styles.title}>Permit prep that feels focused, modern, and calm.</Text>
+        <Text style={styles.subtitle}>Study original DMV-style questions, get instant explanations, and build exam readiness without accounts or distractions.</Text>
       </View>
 
       <View style={styles.featurePanel}>
@@ -56,15 +62,24 @@ export default function OnboardingScreen() {
         </View>
       </View>
 
-      <AppButton title="Start prep" onPress={begin} />
+      <AppButton title="Choose my state" onPress={begin} style={styles.cta} />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
+    gap: 22,
+  },
+  hero: {
+    paddingTop: 8,
+  },
+  brandRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 24,
+    gap: 14,
+    marginBottom: 24,
   },
   brandMark: {
     width: 76,
@@ -73,8 +88,23 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 18,
     ...theme.shadow,
+  },
+  badge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: theme.colors.surface,
+    borderWidth: 1,
+    borderColor: theme.colors.cardBorder,
+    borderRadius: 999,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  badgeText: {
+    color: theme.colors.primaryDark,
+    fontSize: 12,
+    fontWeight: '900',
   },
   kicker: {
     color: theme.colors.primary,
@@ -129,6 +159,9 @@ const styles = StyleSheet.create({
     color: theme.colors.muted,
     fontSize: 13,
     lineHeight: 19,
+    marginTop: 2,
+  },
+  cta: {
     marginTop: 2,
   },
 });

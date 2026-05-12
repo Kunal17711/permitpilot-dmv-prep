@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { ArrowRight, BarChart3, BookOpenCheck, ClipboardList, Gauge, Settings, Target } from 'lucide-react-native';
+import { ArrowRight, BarChart3, BookOpenCheck, CalendarCheck2, ClipboardList, Gauge, Settings, Target } from 'lucide-react-native';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { AppButton } from '@/src/components/AppButton';
@@ -18,6 +18,8 @@ export default function HomeScreen() {
   const wrongByTopic = useAppStore((state) => state.wrongByTopic);
   const examHistory = useAppStore((state) => state.examHistory);
   const summary = buildProgressSummary({ answered: practiceAnswered, correct: practiceCorrect, wrongByTopic, examHistory });
+  const recommendedTitle = summary.weakTopicCount > 0 ? 'Review weak topics, then retake a full exam.' : practiceAnswered < 20 ? 'Build a 20-question practice streak today.' : 'Take a full exam to confirm readiness.';
+  const recommendedDetail = summary.weakTopicCount > 0 ? 'A short focused review will lift your readiness score fastest.' : practiceAnswered < 20 ? 'Answering more practice questions gives the dashboard a stronger signal.' : 'Your practice base is ready for a timed simulation.';
 
   if (!selectedState) {
     router.replace('/state-select');
@@ -41,11 +43,25 @@ export default function HomeScreen() {
           <View style={styles.heroIcon}>
             <Gauge color="#FFFFFF" size={28} />
           </View>
-          <Text style={styles.heroLabel}>Readiness score</Text>
+          <View>
+            <Text style={styles.heroLabel}>Readiness score</Text>
+            <Text style={styles.heroState}>{getStateName(selectedState)}</Text>
+          </View>
         </View>
         <Text style={styles.heroScore}>{summary.readinessScore}%</Text>
         <ProgressBar value={summary.readinessScore} fillColor="#FFFFFF" trackColor="rgba(255,255,255,0.28)" />
         <Text style={styles.heroCopy}>Built from your practice accuracy, completed questions, exam performance, and weak-topic load.</Text>
+      </View>
+
+      <View style={styles.planCard}>
+        <View style={styles.planIcon}>
+          <CalendarCheck2 color={theme.colors.primary} size={22} />
+        </View>
+        <View style={styles.planCopy}>
+          <Text style={styles.planLabel}>Recommended next step</Text>
+          <Text style={styles.planTitle}>{recommendedTitle}</Text>
+          <Text style={styles.planDetail}>{recommendedDetail}</Text>
+        </View>
       </View>
 
       <View style={styles.actions}>
@@ -131,6 +147,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '800',
   },
+  heroState: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '900',
+    marginTop: 2,
+  },
   heroScore: {
     color: '#FFFFFF',
     fontSize: 58,
@@ -142,6 +164,46 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 20,
     marginTop: 14,
+  },
+  planCard: {
+    marginTop: 16,
+    backgroundColor: theme.colors.surface,
+    borderRadius: 20,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: theme.colors.cardBorder,
+    flexDirection: 'row',
+    gap: 13,
+    ...theme.shadow,
+  },
+  planIcon: {
+    width: 46,
+    height: 46,
+    borderRadius: 15,
+    backgroundColor: theme.colors.primarySoft,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  planCopy: {
+    flex: 1,
+  },
+  planLabel: {
+    color: theme.colors.primary,
+    fontSize: 12,
+    fontWeight: '900',
+  },
+  planTitle: {
+    color: theme.colors.text,
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: '900',
+    marginTop: 3,
+  },
+  planDetail: {
+    color: theme.colors.muted,
+    fontSize: 12,
+    lineHeight: 18,
+    marginTop: 4,
   },
   actions: {
     gap: 12,

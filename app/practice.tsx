@@ -65,7 +65,7 @@ export default function PracticeScreen() {
           <Text style={styles.summaryValue}>{accuracy}%</Text>
         </View>
         <ProgressBar value={accuracy} />
-        <Text style={styles.summaryDetail}>{practiceAnswered} answered overall</Text>
+        <Text style={styles.summaryDetail}>{practiceAnswered} answered overall. Explanations appear immediately after each choice.</Text>
       </View>
 
       <QuestionCard question={question} selectedIndex={selectedIndex} showFeedback={selectedIndex !== null} onSelect={chooseAnswer} />
@@ -143,5 +143,6 @@ const styles = StyleSheet.create({
   },
   nextButton: {
     marginTop: 18,
+    marginBottom: 10,
   },
 });

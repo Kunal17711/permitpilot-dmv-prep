@@ -23,6 +23,7 @@ export default function WeakTopicsScreen() {
           <Text style={styles.title}>Weak topics</Text>
         </View>
       </View>
+      <Text style={styles.subhead}>PermitPilot ranks topics by your recent mistakes so the next study session has a clear target.</Text>
 
       {weakTopics.length === 0 ? (
         <View style={styles.emptyCard}>
@@ -42,7 +43,7 @@ export default function WeakTopicsScreen() {
               </View>
               <View style={styles.topicCopy}>
                 <Text style={styles.topicName}>{topic}</Text>
-                <Text style={styles.topicRecommendation}>Review this topic before your next full exam.</Text>
+                <Text style={styles.topicRecommendation}>Review this topic before your next full exam. Aim for two correct practice answers in a row.</Text>
               </View>
               <View style={styles.countBadge}>
                 <TrendingUp color={theme.colors.danger} size={16} />
@@ -84,6 +85,12 @@ const styles = StyleSheet.create({
     lineHeight: 34,
     fontWeight: '900',
     marginTop: 3,
+  },
+  subhead: {
+    color: theme.colors.muted,
+    fontSize: 14,
+    lineHeight: 21,
+    marginTop: 14,
   },
   emptyCard: {
     marginTop: 28,
@@ -133,6 +140,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
+    ...theme.shadow,
   },
   topicRank: {
     width: 34,

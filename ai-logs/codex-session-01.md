@@ -493,3 +493,259 @@ Testing result:
 - `npx expo start --clear` started Expo but stopped because port `8081` was already occupied and the non-interactive shell could not accept the suggested port change.
 - `npx expo start --clear --port 8082` no longer showed the missing `assets/logo.png` error; it hit a sandbox network `fetch failed`.
 - `npx expo start --clear --offline --port 8082` successfully cleared the cache, started Metro, and reached `Waiting on http://localhost:8082` without the missing asset error.
+
+## Prompt 3 — Final UI polish, README, and reflection
+
+You are continuing work on PermitPilot — DMV Permit & Driving Test Prep.
+
+The core app is already built and running. Now perform final contest polish for an 8x Engineer submission.
+
+Important:
+- Do not rebuild the app from scratch.
+- Do not remove working functionality.
+- Do not add backend/auth/API keys.
+- Keep everything local.
+- Keep Expo React Native + TypeScript + Expo Router.
+- Keep the app original and do not copy Zutobi assets, logo, exact UI, or exact questions.
+- Update ai-logs/codex-session-01.md with this full prompt and your response summary.
+- Commit and push changes after finishing.
+
+Current issues observed from phone screenshots:
+1. Practice screen bottom button is too close to the Android home indicator and partially cut off.
+2. Exam screen bottom “Next” button is also too close to the bottom.
+3. Some screens need safer bottom padding and better ScrollView behavior.
+4. Progress dashboard is good but should be more screenshot-ready.
+5. Home dashboard should feel more premium and clearer as the main demo screen.
+6. Exam result screen should be more visually impressive and easier to screenshot.
+7. Remove unused default Expo template screens/files/routes if they are not used, especially any leftover tabs/two/modal demo files, but only if safe.
+8. Add a professional README.md.
+9. Add a contest reflection file.
+
+Tasks:
+
+1. Fix safe area and bottom spacing everywhere
+- Ensure every screen works on Android devices with gesture navigation.
+- Use safe area handling and proper bottom padding.
+- Buttons must not be hidden behind the Android home indicator.
+- Practice and Exam buttons should be fully visible.
+- Long screens should scroll smoothly.
+- Avoid content being cut off at top or bottom.
+
+2. Polish onboarding screen
+- Make it feel like a premium DMV prep app landing screen.
+- Keep the PermitPilot brand.
+- Improve microcopy if needed.
+- Make CTA clear.
+- Keep visual style clean, modern, teal/emerald, white cards, soft shadows.
+
+3. Polish state selector
+- Keep California, Texas, New York, Florida.
+- Make selected state visually strong.
+- Ensure Save State button is always visible and not cut off.
+- Add small supporting copy about localized question banks.
+
+4. Polish home dashboard
+- Make it screenshot-worthy.
+- It should clearly show:
+  - selected state
+  - readiness score
+  - practice CTA
+  - full exam CTA
+  - weak topics shortcut
+  - progress dashboard shortcut
+- Add a small “Today’s plan” or “Recommended next step” card if useful.
+- Keep the layout clean and not cluttered.
+
+5. Polish practice mode
+- Improve question UX.
+- Answer options should feel tappable.
+- After selecting an option:
+  - correct answer should be clearly highlighted
+  - wrong selected answer should be clearly highlighted if wrong
+  - explanation card should appear cleanly
+  - “Next Question” button should be visible and not cut off
+- Before selecting an answer, disabled button should be visible and not cut off.
+- Keep topic and difficulty pills.
+
+6. Polish weak topics screen
+- Keep both states:
+  - empty state
+  - weak topics list
+- Improve ranking/visual hierarchy.
+- Add helpful reviewer-friendly microcopy.
+
+7. Polish full exam mode
+- Make progress and timer clean.
+- Ensure option selection and Next button work smoothly.
+- Button must not be cut off.
+- Show passing score clearly.
+- Make it feel like a real test simulation.
+
+8. Polish exam result screen
+- Make pass/fail result very screenshot-worthy.
+- Show:
+  - pass/fail
+  - score out of 20
+  - percentage
+  - readiness message
+  - actions to practice weak topics / retake exam / go home
+- Add topic breakdown if already available or simple summary if easy.
+- Do not overcomplicate.
+
+9. Polish progress dashboard
+- Make the top readiness card premium.
+- Show accuracy, completed questions, correct answers, best exam, last exam, weak topics, selected state.
+- Improve spacing so screenshots look clean.
+- Ensure lower content is scrollable and not cut off.
+
+10. Settings screen
+- Keep current state.
+- Change state button.
+- Reset progress button.
+- Make reset action safe and visually clear.
+- Do not make it look scary unless user intentionally taps it.
+
+11. Clean project structure
+- Remove unused default Expo template demo files/routes/components only if they are not imported or needed.
+- Do not break imports.
+- Do not remove assets required by app.json.
+- Make sure there are no broken routes.
+- Keep the code clean.
+
+12. README.md
+Create a strong README.md for GitHub with:
+- Project title: PermitPilot — DMV Permit & Driving Test Prep
+- Short description
+- Contest context
+- Features
+- Tech stack
+- Screens
+- How to run
+- AI logs note
+- Originality note
+- Submission/demo note
+
+13. Reflection
+Create:
+reflection.md
+
+Include:
+- What was easy
+- What was difficult
+- What I learned
+- What I would improve with more time
+- How AI helped during development
+Keep it honest, clear, and professional.
+
+14. AI logs
+Append this prompt to:
+ai-logs/codex-session-01.md
+
+Use:
+
+## Prompt 3 — Final UI polish, README, and reflection
+
+Then paste this full prompt.
+
+Add:
+
+## Response 3
+
+Include:
+- summary of changes
+- files edited
+- files created
+- commands run
+- issues fixed
+- testing result
+- GitHub push status
+
+15. Testing
+Run:
+npm run lint if available
+npx tsc --noEmit if available
+npx expo start --clear --offline --port 8082
+
+Fix TypeScript/import/runtime errors if found.
+
+16. Git
+Run:
+git add .
+git commit -m "polish permitpilot for contest submission"
+git push
+
+Final response:
+Tell me:
+1. What UI issues you fixed.
+2. Which screens were polished.
+3. Which files were created/edited.
+4. Whether TypeScript/build checks passed.
+5. Whether GitHub push succeeded.
+6. Exact command to run the app on phone.
+7. Final screenshot list for submission.
+8. Final Loom walkthrough outline.
+
+## Response 3
+
+Summary of changes:
+- Added safe-area-aware bottom padding in the shared `Screen` component so Android gesture navigation does not cover bottom buttons.
+- Polished onboarding with stronger brand presentation, clearer microcopy, local-progress badge, and a clearer CTA.
+- Improved state selector copy and added a save panel so the selected state flow feels more intentional.
+- Polished the home dashboard with selected-state emphasis and a recommended next-step card.
+- Improved practice answer UX with stronger tappable options, clearer prompt copy, polished explanation labeling, and safer bottom spacing.
+- Polished full exam mode with cleaner progress, timer, passing-score context, and safer bottom spacing.
+- Improved weak topics hierarchy and reviewer-friendly guidance copy.
+- Upgraded exam results with a more screenshot-ready hero, result stats, retake action, weak-topic action, and home action.
+- Improved progress dashboard with readiness formula copy and local-storage context.
+- Made settings reset feel safer by using a neutral reset button and clearer confirmation copy.
+- Confirmed leftover default tabs/two/modal demo routes had already been removed; no app routes were broken.
+- Added a professional `README.md`.
+- Added `reflection.md`.
+
+Files edited:
+- `src/components/Screen.tsx`
+- `src/components/QuestionCard.tsx`
+- `src/components/StateCard.tsx`
+- `app/onboarding.tsx`
+- `app/state-select.tsx`
+- `app/home.tsx`
+- `app/practice.tsx`
+- `app/exam.tsx`
+- `app/exam-result.tsx`
+- `app/progress.tsx`
+- `app/weak-topics.tsx`
+- `app/settings.tsx`
+- `ai-logs/codex-session-01.md`
+
+Files created:
+- `README.md`
+- `reflection.md`
+
+Commands run:
+- `Get-Content` on current route/component files
+- `rg --files`
+- `npm run lint`
+- `npx tsc --noEmit`
+- `npx expo start --clear --offline --port 8082`
+- `netstat -ano | Select-String ':8082'`
+- `Get-Process -Id 9188`
+- `Stop-Process -Id 9188 -Force`
+- `npx expo export --platform web`
+
+Issues fixed:
+- Practice bottom button spacing on Android gesture navigation.
+- Exam bottom button spacing on Android gesture navigation.
+- Safer shared ScrollView bottom padding for long screens.
+- Improved screenshot readiness for onboarding, home, exam result, progress, weak topics, and settings.
+- Added contest documentation and reflection artifacts.
+
+Testing result:
+- `npm run lint` could not run because `package.json` has no `lint` script.
+- `npx tsc --noEmit` passed.
+- First `npx expo start --clear --offline --port 8082` found port `8082` already occupied.
+- The existing Node listener on `8082` was stopped.
+- Rerunning `npx expo start --clear --offline --port 8082` successfully cleared Metro cache and reached `Waiting on http://localhost:8082`.
+- `npx expo export --platform web` completed successfully and exported all 12 static routes.
+
+GitHub push status:
+- Pending at the time this log entry was written; the changes are committed and pushed immediately after this file is staged.
