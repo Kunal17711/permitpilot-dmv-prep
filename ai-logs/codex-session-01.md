@@ -393,3 +393,103 @@ How to run the app:
 
 What is pending:
 - Git commit and push are performed after this log is written so the log is included in the commit.
+
+## Prompt 2 — Startup asset and package compatibility fix
+
+Fix the current Expo runtime error and compatibility warning in PermitPilot.
+
+Current terminal output:
+
+Error:
+Asset not found: E:\permitpilot-dmv-prep\assets\logo.png for platform: (unspecified)
+
+Compatibility warning:
+@react-native-async-storage/async-storage@3.0.2 - expected version: 2.2.0
+
+Tasks:
+
+1. Fix the missing asset issue properly.
+   - Open app.json / app.config if present.
+   - Find every reference to assets/logo.png.
+   - Either create a valid assets/logo.png file OR update the config to point to a valid existing PNG asset.
+   - Preferred approach:
+     - Create a simple original PermitPilot app icon/logo PNG inside assets/logo.png if possible.
+     - If PNG generation is not practical, update app.json to use an existing valid asset from the assets folder.
+   - Make sure all icon, splash, adaptiveIcon, and favicon paths point to files that actually exist.
+   - Do not use remote images.
+   - Do not use Zutobi assets.
+
+2. Fix the AsyncStorage Expo compatibility warning.
+   - Install the Expo-compatible version:
+     npx expo install @react-native-async-storage/async-storage
+   - Ensure package.json and package-lock.json are updated correctly.
+
+3. Clean Metro cache and test.
+   - Run:
+     npx expo start --clear
+   - If the dev server starts successfully without the missing logo error, stop after confirming.
+   - Do not leave the terminal running forever if you can avoid it.
+
+4. Keep app functionality unchanged.
+   - Do not redesign the app in this prompt.
+   - Do not remove screens.
+   - Do not break routes.
+   - Only fix asset paths, package compatibility, and any direct startup errors.
+
+5. Update AI logs.
+   - Append this full prompt under:
+     ## Prompt 2 — Startup asset and package compatibility fix
+   - Add your response under:
+     ## Response 2
+   - Include:
+     - what caused the error
+     - files changed
+     - packages updated
+     - commands run
+     - whether the app now starts
+   - File:
+     ai-logs/codex-session-01.md
+
+6. Commit and push.
+   - Run:
+     git add .
+     git commit -m "fix expo startup assets and package compatibility"
+     git push
+
+Final response:
+Tell me:
+1. What exactly you fixed.
+2. Which files changed.
+3. Whether npm start / expo start works now.
+4. Whether GitHub push succeeded.
+5. The exact command I should run next to open it on my phone.
+
+## Response 2
+
+Fixed the Expo startup asset error by creating a valid original local PNG at `assets/logo.png`. The checked-in `app.json` already pointed `icon`, `splash.image`, `android.adaptiveIcon.foregroundImage`, and `web.favicon` to existing files under `assets/images`, and no checked-in config reference to `assets/logo.png` was found. The runtime error was caused by Expo/Metro looking for `assets/logo.png` while the file did not exist.
+
+Updated `@react-native-async-storage/async-storage` with `npx expo install @react-native-async-storage/async-storage`, changing it from `^3.0.2` to the Expo SDK 54 compatible `2.2.0` and updating `package-lock.json`.
+
+Files changed:
+- `assets/logo.png`
+- `package.json`
+- `package-lock.json`
+- `ai-logs/codex-session-01.md`
+
+Commands run:
+- `Get-Content app.json`
+- `Get-ChildItem -Recurse -File assets`
+- `rg "assets/logo\.png|logo\.png|icon|splash|favicon|adaptiveIcon" app.json app.config.* package.json`
+- `rg "assets/logo\.png|logo\.png" --glob "!node_modules/**" --glob "!dist/**" --glob "!.expo/**"`
+- PowerShell/System.Drawing command to generate `assets/logo.png`
+- `npx expo install @react-native-async-storage/async-storage`
+- `npx tsc --noEmit`
+- `npx expo start --clear`
+- `npx expo start --clear --port 8082`
+- `npx expo start --clear --offline --port 8082`
+
+Testing result:
+- `npx tsc --noEmit` passed.
+- `npx expo start --clear` started Expo but stopped because port `8081` was already occupied and the non-interactive shell could not accept the suggested port change.
+- `npx expo start --clear --port 8082` no longer showed the missing `assets/logo.png` error; it hit a sandbox network `fetch failed`.
+- `npx expo start --clear --offline --port 8082` successfully cleared the cache, started Metro, and reached `Waiting on http://localhost:8082` without the missing asset error.
